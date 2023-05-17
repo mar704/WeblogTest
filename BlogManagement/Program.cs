@@ -1,11 +1,13 @@
+using BlogManagement.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyConenctionString")));
+builder.Services.AddDbContext<BlogContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyConenctionString")));
 
 
 builder.Services.AddAuthentication(options =>
