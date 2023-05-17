@@ -1,0 +1,54 @@
+﻿@model BlogManagement.Models.BlogPost
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h4>ایجاد پست جدید</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContentBlogPost" class="control-label"></label>
+                <input asp-for="ContentBlogPost" class="form-control" />
+                <span asp-validation-for="ContentBlogPost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
+
+                @*<select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>*@
+                <select id="CategoryId" class="form-control" name="CategoryId">
+
+                    @foreach (var CInfo in ViewBag.CategoryList)
+                    {
+                        <option value="@CInfo.Key">
+                            @CInfo.Value
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
