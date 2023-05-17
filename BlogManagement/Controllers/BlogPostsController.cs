@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BlogManagement.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BlogManagement.Controllers
 {
@@ -49,11 +50,13 @@ namespace BlogManagement.Controllers
         }
 
         // GET: BlogPosts/Create
-       // [Authorize]
+        // [Authorize]
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+
         public IActionResult Create()
         {
            ViewBag.CategoryList = GetAllCategory();
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
           
             return View();
         }
@@ -61,7 +64,9 @@ namespace BlogManagement.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-       // [Authorize]
+        //[Authorize]
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+
         public async Task<IActionResult> Create([Bind("Id,Title,ContentBlogPost,CategoryId")] BlogPost blogPost)
         {
             if (ModelState.IsValid)

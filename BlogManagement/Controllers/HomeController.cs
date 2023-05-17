@@ -1,6 +1,7 @@
 ﻿using BlogManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BlogManagement.Controllers
 {
@@ -15,6 +16,18 @@ namespace BlogManagement.Controllers
 
         public IActionResult Index()
         {
+
+
+           
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var username = User.Identity.Name;
+
+                // استفاده از اطلاعات هویت
+                
+            
+
+
+
             return View();
         }
 
